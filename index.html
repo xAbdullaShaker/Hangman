@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hangman</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>Find the Hidden Word</h1>
+  </header>
+
+  <main>
+    <!-- Hangman drawing area -->
+    <div id="hangman-container"></div>
+
+    <!-- Word display: blanks and letters will appear here -->
+    <p id="word-container"></p>
+
+    <!-- Wrong letters: incorrect guesses will be shown here -->
+    <p>Wrong: <span id="wrong-letters"></span></p>
+
+    <!-- Message area: to display win/lose text -->
+    <p id="message"></p>
+
+    <!-- Control buttons -->
+    <button id="play-button">Play</button>
+    <button id="retry-button">Try Again</button>
+  </main>
+
+</body>
+</html>
