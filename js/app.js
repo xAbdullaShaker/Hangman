@@ -1,44 +1,52 @@
 /*-------------- Constants -------------*/
-const words = ['computer', 'programming', 'array', 'code'];
-let selectedWord = words[Math.floor(Math.random() * words.length)];
+const words = ['computer', 'programming', 'array', 'code']; // List of words to choose from
+let selectedWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word from the list
 
-const maxWrong = 6
-
-let currentLetters = []
-
+const maxWrong = 6 //number of wrong guesses allowed
 
 /*---------- Variables (state) ---------*/
-
-let correctGuesses = [];       // Letters the player guessed correctly
-let wrongGuesses = [];         // Letters the player guessed wrong
-
+let correctLetters = [] // store correct guessed letters
+let wrongLetters = []  // store wrong guessed letters
 
 /*----- Cached Element References  -----*/
-
-// HTML elements to update using JS
-const wordContainerEl = document.getElementById('word-container');
-const wrongLettersEl = document.getElementById('wrong-letters');
-const messageEl = document.getElementById('message');
-const playBtn = document.getElementById('play-button');
-const retryBtn = document.getElementById('retry-button');
-
+const wordContainerEl = document.getElementById('word-container') // Where the word (or underscores) will be displayed
+const wrongLettersEl = document.getElementById('wrong-letters')   // Where wrong letters will be shown
+const messageEl = document.getElementById('message')              // Message display area for win/lose/status
+const playBtn = document.getElementById('play-button')            // Play button to start or restart the game
+const retryBtn = document.getElementById('retry-button')          // Retry button for restarting the game
+const hangmanContainer = document.getElementById('hangman-container') // Container for hangman parts
 
 /*-------------- Functions -------------*/
-// 
+
 function updateWordDisplay() {
+  // Display the word with guessed letters and underscores for hidden ones
   wordContainerEl.innerHTML = selectedWord
-    .split('') // converts the word to letters 
-    .map(letter => correctLetters.includes(letter) ? letter : '_') // makes the unguessed letters to '_'
-    .join(' '); //removes the spaces 
-  
-  checkWin(); // check if the player won
+    .split('') // males the words to letters
+    .map(letter => correctLetters.includes(letter) ? letter : '_')
+    .join(' ') // removes spaces
+
+  checkWin() // checks if win
 }
-
-  // sees if the letter a-z in english only
-  if (letter.match(/^[a-z]$/)) {
-    handleGuess(letter);
-  }
-
+// Update the display of wrong letters and hangman parts
+function updateWrongDisplay() {
+  wrongLettersEl.textContent = wrongLetters.join(', ') // shows all the wrongly guessed letters
+  updateHangman()
+  checkLose()
+}
+// Show or hide hangman figure parts based on the number of wrong guesses
+function updateHangman() {
+  const parts = hangmanContainer.querySelectorAll('.hangman-part')
+  parts.forEach((part, index) => {
+    part.style.display = index < wrongLetters.length ? 'block' : 'none'
+  })
+}
+// Show a temporary message to the player
+function showMessage(msg) {
+  messageEl.textContent = msg;
+  setTimeout(() => {
+    messageEl.textContent = ''
+  }, 2000);
+}
 
 function handleGuess(letter) {
   if (selectedWord.includes(letter)) {
@@ -58,11 +66,52 @@ function handleGuess(letter) {
   }
 }
 
-/*----------- Event Listeners ----------*/
+function checkWin() {
+  const won = selectedWord.split('').every(letter => correctLetters.includes(letter));
+  if (won) {
+    showMessage("🎉 You won!");
+    disableInput();
+  }
+}
 
-// register the keyboard input
-document.addEventListener('keyup', (event) => {
+function checkLose() {
+  if (wrongLetters.length >= maxWrong) {
+    showMessage(`Game Over! The word was "${selectedWord}"`);
+    disableInput();
+  }
+}
+
+function disableInput() {
+  document.removeEventListener('keyup', onKeyUp);
+}
+
+function enableInput() {
+  document.addEventListener('keyup', onKeyUp);
+}
+
+function resetGame() {
+  correctLetters = [];
+  wrongLetters = [];
+  selectedWord = words[Math.floor(Math.random() * words.length)];
+  updateWordDisplay();
+  updateWrongDisplay();
+  messageEl.textContent = '';
+  enableInput();
+}
+
+/*----------- Event Listeners ----------*/
+// registers the keyboard input
+function onKeyUp(event) {
   const letter = event.key.toLowerCase();
-})
-playBtn.addEventListener('click', resetGame); // Restart the game on play button click
-retryBtn.addEventListener('click', resetGame); // Restart the game on retry button click
+  if (letter.match(/^[a-z]$/)) {
+    handleGuess(letter);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateWordDisplay();
+  updateWrongDisplay();
+  document.addEventListener('keyup', onKeyUp);
+  playBtn.addEventListener('click', resetGame);
+  retryBtn.addEventListener('click', resetGame);
+});
