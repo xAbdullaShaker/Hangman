@@ -1,12 +1,24 @@
 
+/* background but bugged
+ body {
+  background-image: url('assets/background-hangman.jpg');
+  background-size: cover;        
+  background-position: center;    
+  background-repeat: no-repeat;  
+  background-attachment: fixed; 
+  height: 100vh;                  
+  margin: 0;                    
+}
+*/
+
 #hangman-container {
-  position: auto;
+  position: fixed;
   top: 10px;
   right: 33vw;
   width: 150px;     
   height: 105px;   
 
-}
+} 
 
 /* Gallows pieces */
 #gallows .gallow-base {
@@ -34,10 +46,71 @@
     }
 
 
-    .hangman-part {
+   /* .hangman-part {
       display: none;
       width: 10px;
       height: 12px;
       background: black;
       margin: 10px;
-    }
+    } */
+
+    .hangman-part {
+  position: absolute;
+  background-color: black;
+  display: none;
+}
+
+
+#head {
+  top: 10px;
+  left: 30px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+
+#body {
+  top: 30px;
+  left: 39px;
+  width: 2px;
+  height: 30px;
+}
+
+
+#left-arm {
+  top: 35px;
+  left: 39px;
+  width: 20px;
+  height: 2px;
+  transform: rotate(35deg);
+  transform-origin: left center;
+}
+
+#right-arm {
+  top: 35px;
+  left: 20px;
+  width: 20px;
+  height: 2px;
+  transform: rotate(-35deg);
+  transform-origin: right center;
+}
+
+
+#left-leg {
+  top: 60px;
+  left: 39px;
+  width: 20px;
+  height: 2px;
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+
+#right-leg {
+  top: 60px;
+  left: 20px;
+  width: 20px;
+  height: 2px;
+  transform: rotate(-45deg);
+  transform-origin: right center;
+}

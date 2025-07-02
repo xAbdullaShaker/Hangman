@@ -1,5 +1,5 @@
 /*-------------- Constants -------------*/
-const words = ['computer', 'programming', 'array', 'code']; // List of words to choose from
+const words = ['computer', 'programming', 'array', 'code', 'algorithm', 'variable']; // List of words to choose from
 let selectedWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word from the list
 
 const maxWrong = 6 //number of wrong guesses allowed
@@ -21,8 +21,8 @@ const hangmanContainer = document.getElementById('hangman-container') // Contain
 function updateWordDisplay() {
   // Display the word with guessed letters and underscores for hidden ones
   wordContainerEl.innerHTML = selectedWord
-    .split('') // males the words to letters
-    .map(letter => correctLetters.includes(letter) ? letter : '_')
+    .split('') // makes the words to letters
+    .map(letter => correctLetters.includes(letter) ? letter : '_')//if true reuturn letter else '_'
     .join(' ') // removes spaces
 
   checkWin() // checks if win
