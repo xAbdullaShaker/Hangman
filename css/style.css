@@ -1,7 +1,7 @@
 
-/* background but bugged
+
  body {
-  background-image: url('assets/background-hangman.jpg');
+  background-image: url('../assets/bearbg.jpg');
   background-size: cover;        
   background-position: center;    
   background-repeat: no-repeat;  
@@ -9,7 +9,18 @@
   height: 100vh;                  
   margin: 0;                    
 }
-*/
+
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  letter-spacing: 3px;
+  color: #0f0d05; 
+  text-shadow: 2px 2px 8px #000000;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-family: cursive;
+}
 
 #hangman-container {
   position: fixed;
@@ -63,7 +74,7 @@
 
 #head {
   top: 10px;
-  left: 30px;
+  left: 53px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -72,15 +83,15 @@
 
 #body {
   top: 30px;
-  left: 39px;
+  left: 61px;
   width: 2px;
-  height: 30px;
+  height: 32px;
 }
 
-
+/*right arm*/
 #left-arm {
   top: 35px;
-  left: 39px;
+  left: 62px;
   width: 20px;
   height: 2px;
   transform: rotate(35deg);
@@ -89,7 +100,7 @@
 
 #right-arm {
   top: 35px;
-  left: 20px;
+  left: 41.5px;
   width: 20px;
   height: 2px;
   transform: rotate(-35deg);
@@ -99,7 +110,7 @@
 
 #left-leg {
   top: 60px;
-  left: 39px;
+  left: 62px;
   width: 20px;
   height: 2px;
   transform: rotate(45deg);
@@ -108,7 +119,7 @@
 
 #right-leg {
   top: 60px;
-  left: 20px;
+  left: 41.5px;
   width: 20px;
   height: 2px;
   transform: rotate(-45deg);
