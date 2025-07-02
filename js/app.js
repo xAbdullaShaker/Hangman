@@ -58,31 +58,42 @@ function showMessage(msg) {
 }
 
 function handleGuess(letter) {
-  if (selectedWord.includes(letter)) {
+  if (selectedWord.includes(letter)) 
+     { showMessage ("Correct!( ദ്ദി ˙ᗜ˙ )")
     if (!correctLetters.includes(letter)) {
       correctLetters.push(letter);
       updateWordDisplay()
     } else {
-      showMessage("You already guessed that letter!");
+      showMessage("You already guessed that letter!(¬_¬)");
     }
-  } else {
+  }
+   else {
     if (!wrongLetters.includes(letter)) {
       wrongLetters.push(letter)
       updateWrongDisplay()
     } else {
-      showMessage("Wrong again! You already guessed that.")
+      showMessage("Wrong again! You already guessed that. ( ˶°ㅁ°) !!")
     }
   }
 }
 
+/* let won = true;
+
+for (const letter of selectedWord) {
+  if (!correctLetters.includes(letter)) {
+    won = false;
+    break;
+  }
+} */ 
+
 function checkWin() {
   const won = selectedWord.split('').every(letter => correctLetters.includes(letter))
   if (won) {
-    showMessage("🎉 You won!");
+    showMessage("👏 You won!");
     disableInput();
   }
 }
-
+// 6 tries 
 function checkLose() {
   if (wrongLetters.length >= maxWrong) {
     showMessage(`Game Over! The word was 💥💀 "${selectedWord}"`)
@@ -91,18 +102,18 @@ function checkLose() {
 }
 
 function disableInput() {
-  document.removeEventListener('keyup', onKeyUp)
+  document.removeEventListener('keyup', onKeyUp) // plyer cant type
 }
 
 function enableInput() {
-  document.addEventListener('keyup', onKeyUp);
+  document.addEventListener('keyup', onKeyUp); // adds the keyup again
 }
 
 function resetGame() {
-  correctLetters = []
-  wrongLetters = []
-  selectedWord = words[Math.floor(Math.random() * words.length)]
-  updateWordDisplay()
+  correctLetters = [] //rests the correct letters
+  wrongLetters = [] // restes the wrong letters 
+  selectedWord = words[Math.floor(Math.random() * words.length)] // chooses another random word 
+  updateWordDisplay() // updates the _ _ 
   updateWrongDisplay()
   messageEl.textContent = ''
   enableInput()
@@ -117,9 +128,13 @@ function onKeyUp(event) {
   }
 }
 
+// makes the game starts after the page fully loaded ;)
 document.addEventListener('DOMContentLoaded', () => {
   updateWordDisplay()
   updateWrongDisplay()
+
+
+ 
   document.addEventListener('keyup', onKeyUp)
   playBtn.addEventListener('click', resetGame)
   retryBtn.addEventListener('click', resetGame)
