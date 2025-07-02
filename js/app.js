@@ -35,39 +35,48 @@ function updateWrongDisplay() {
 }
 // Show or hide hangman figure parts based on the number of wrong guesses
 function updateHangman() {
-  const parts = hangmanContainer.querySelectorAll('.hangman-part')
-  parts.forEach((part, index) => {
-    part.style.display = index < wrongLetters.length ? 'block' : 'none'
-  })
+  const parts = hangmanContainer.querySelectorAll('.hangman-part');
+
+  //  loop over each part and its position 
+  parts.forEach(function(part, index) {
+    
+    if (index < wrongLetters.length) { 
+      part.style.display = 'block' // Show the part
+    } else {
+      // Otherwise hide the part completely
+      part.style.display = 'none'
+    }
+  });
 }
+
 // Show a temporary message to the player
 function showMessage(msg) {
-  messageEl.textContent = msg;
+  messageEl.textContent = msg
   setTimeout(() => {
     messageEl.textContent = ''
-  }, 2000);
+  }, 2000 ) // shows for 2sec
 }
 
 function handleGuess(letter) {
   if (selectedWord.includes(letter)) {
     if (!correctLetters.includes(letter)) {
       correctLetters.push(letter);
-      updateWordDisplay();
+      updateWordDisplay()
     } else {
       showMessage("You already guessed that letter!");
     }
   } else {
     if (!wrongLetters.includes(letter)) {
-      wrongLetters.push(letter);
-      updateWrongDisplay();
+      wrongLetters.push(letter)
+      updateWrongDisplay()
     } else {
-      showMessage("Wrong again! You already guessed that.");
+      showMessage("Wrong again! You already guessed that.")
     }
   }
 }
 
 function checkWin() {
-  const won = selectedWord.split('').every(letter => correctLetters.includes(letter));
+  const won = selectedWord.split('').every(letter => correctLetters.includes(letter))
   if (won) {
     showMessage("🎉 You won!");
     disableInput();
@@ -76,13 +85,13 @@ function checkWin() {
 
 function checkLose() {
   if (wrongLetters.length >= maxWrong) {
-    showMessage(`Game Over! The word was "${selectedWord}"`);
+    showMessage(`Game Over! The word was 💥💀 "${selectedWord}"`)
     disableInput();
   }
 }
 
 function disableInput() {
-  document.removeEventListener('keyup', onKeyUp);
+  document.removeEventListener('keyup', onKeyUp)
 }
 
 function enableInput() {
@@ -90,13 +99,13 @@ function enableInput() {
 }
 
 function resetGame() {
-  correctLetters = [];
-  wrongLetters = [];
-  selectedWord = words[Math.floor(Math.random() * words.length)];
-  updateWordDisplay();
-  updateWrongDisplay();
-  messageEl.textContent = '';
-  enableInput();
+  correctLetters = []
+  wrongLetters = []
+  selectedWord = words[Math.floor(Math.random() * words.length)]
+  updateWordDisplay()
+  updateWrongDisplay()
+  messageEl.textContent = ''
+  enableInput()
 }
 
 /*----------- Event Listeners ----------*/
@@ -109,9 +118,9 @@ function onKeyUp(event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  updateWordDisplay();
-  updateWrongDisplay();
-  document.addEventListener('keyup', onKeyUp);
-  playBtn.addEventListener('click', resetGame);
-  retryBtn.addEventListener('click', resetGame);
-});
+  updateWordDisplay()
+  updateWrongDisplay()
+  document.addEventListener('keyup', onKeyUp)
+  playBtn.addEventListener('click', resetGame)
+  retryBtn.addEventListener('click', resetGame)
+})

@@ -1,38 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hangman</title>
   <script src="js/app.js" defer></script>
-  <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
   <header>
     <h1>Find the Hidden Word</h1>
   </header>
 
-  <main>
-    <!--no parts yet-->
-   <div id="hangman-container">
-  <div class="hangman-part" id="head"></div>
-  <div class="hangman-part" id="body"></div>
-  <div class="hangman-part" id="left-arm"></div>
-  <div class="hangman-part" id="right-arm"></div>
-  <div class="hangman-part" id="left-leg"></div>
-  <div class="hangman-part" id="right-leg"></div>
-</div>
 
-
-    <!-- Word display: blanks and letters will appear here -->
+    <!-- Word display -->
     <p id="word-container"></p>
 
-    <!-- Wrong letters: incorrect guesses will be shown here -->
+    <!-- Wrong letters -->
     <p>Wrong: <span id="wrong-letters"></span></p>
 
-    <!-- Message area: to display win/lose text -->
+    <!-- Messages -->
     <p id="message"></p>
 
     <!-- Control buttons -->
@@ -40,6 +27,20 @@
     <button id="retry-button">Try Again</button>
   </main>
 
+  
+  <div id="hangman-container">
+    <div id="gallows">
+      <div class="gallow-base"></div>
+      <div class="gallow-post"></div>
+      <div class="gallow-beam"></div>
+      <div class="gallow-rope"></div>
+    </div id= "parts-container">
+    <div class="hangman-part head"    id="head"></div>
+    <div class="hangman-part body"    id="body"></div>
+    <div class="hangman-part left-arm"  id="left-arm"></div>
+    <div class="hangman-part right-arm" id="right-arm"></div>
+    <div class="hangman-part left-leg"  id="left-leg"></div>
+    <div class="hangman-part right-leg" id="right-leg"></div>
+  </div>
 </body>
 </html>
-
