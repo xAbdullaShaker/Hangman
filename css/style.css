@@ -23,13 +23,42 @@ h1 {
 }
 
 #hangman-container {
+  position: fixed;         /* ثابت في مكانه على الشاشة */
+  top: 20px;               /* مسافة من الأعلى */
+  left: 270px;              /* مسافة من اليسار بدلاً من right */
+  width: 150px;            /* عرض ثابت */
+  height: 105px;           /* ارتفاع ثابت */
+  z-index: 9999;           /* فوق كل العناصر الأخرى */
+  background-color: transparent; /* شفاف */
+  display: block;          /* تأكد أنه ظاهر */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;   /* يمنع التمدد الأفقي */
+  height: 100%;
+  width: 100%;
+}
+
+/* قلل تأثير العناصر الأخرى على التمركز */
+main, section, .wrapper, .container {
+  position: static !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+/*
+#hangman-container {
   position: fixed;
   top: 10px;
-  right: 33vw;
+  right: 250px;
   width: 150px;     
   height: 105px;   
 
-} 
+} */
 
 /* Gallows pieces */
 #gallows .gallow-base {
@@ -98,6 +127,7 @@ h1 {
   transform-origin: left center;
 }
 
+/*left arm */
 #right-arm {
   top: 35px;
   left: 41.5px;

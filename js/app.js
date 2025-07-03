@@ -1,5 +1,5 @@
 /*-------------- Constants -------------*/
-const words = ['computer', 'programming', 'array', 'code', 'algorithm', 'variable']; // List of words to choose from
+const words = ['computer', 'array', 'code', 'algorithm', 'variable']; // List of words to choose from
 let selectedWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word from the list
 
 const maxWrong = 6 //number of wrong guesses allowed
@@ -35,7 +35,7 @@ function updateWrongDisplay() {
 }
 // Show or hide hangman figure parts based on the number of wrong guesses
 function updateHangman() {
-  const parts = hangmanContainer.querySelectorAll('.hangman-part');
+  const parts = hangmanContainer.querySelectorAll('.hangman-part')
 
   //  loop over each part and its position 
   parts.forEach(function(part, index) {
@@ -57,6 +57,25 @@ function showMessage(msg) {
   }, 2000 ) // shows for 2sec
 }
 
+// Show image temporarily when 1 try is left :)
+function showWarningImage() {
+  const img = document.createElement('img')
+  img.src = '../assets/dosomething.jpg'
+  img.alt = '1 try left warning'
+  img.style.position = 'fixed'
+  img.style.left = '500px'
+  img.style.top = '100px'
+  img.style.width = '150px'
+  img.style.height = 'auto'
+  img.style.zIndex = '9999'
+
+  document.body.appendChild(img);
+
+  setTimeout(() => {
+    document.body.removeChild(img);
+  }, 5000); // remove after 5 seconds
+}
+
 function handleGuess(letter) {
   if (selectedWord.includes(letter)) 
      { showMessage ("Correct!( ദ്ദി ˙ᗜ˙ )")
@@ -64,13 +83,17 @@ function handleGuess(letter) {
       correctLetters.push(letter);
       updateWordDisplay()
     } else {
-      showMessage("You already guessed that letter!(¬_¬)");
+      showMessage("You already guessed that letter!(¬_¬)")
     }
   }
    else {
     if (!wrongLetters.includes(letter)) {
       wrongLetters.push(letter)
       updateWrongDisplay()
+       // Show warning image if only 1 try left
+      if ((maxWrong - wrongLetters.length) === 1) {
+        showWarningImage();
+      }
     } else {
       showMessage("Wrong again! You already guessed that. ( ˶°ㅁ°) !!")
     }
@@ -89,17 +112,24 @@ for (const letter of selectedWord) {
 function checkWin() {
   const won = selectedWord.split('').every(letter => correctLetters.includes(letter))
   if (won) {
-    showMessage("👏 You won!");
-    disableInput();
+    showMessage("👏 You won!")
+    disableInput()
   }
 }
 // 6 tries 
 function checkLose() {
   if (wrongLetters.length >= maxWrong) {
     showMessage(`Game Over! The word was 💥💀 "${selectedWord}"`)
+    setTimeout(() => {
+   // document.body.removeChild(img)
+  }, 6000); // remove after 6 seconds but not working yet
     disableInput();
   }
 }
+
+
+
+
 
 function disableInput() {
   document.removeEventListener('keyup', onKeyUp) // plyer cant type
@@ -119,14 +149,16 @@ function resetGame() {
   enableInput()
 }
 
-/*----------- Event Listeners ----------*/
-// registers the keyboard input
+// registers the keyboard input 
 function onKeyUp(event) {
-  const letter = event.key.toLowerCase();
+  const letter = event.key.toLowerCase() // convert to lowercase
   if (letter.match(/^[a-z]$/)) {
     handleGuess(letter);
   }
 }
+
+/*----------- Event Listeners ----------*/
+
 
 // makes the game starts after the page fully loaded ;)
 document.addEventListener('DOMContentLoaded', () => {
