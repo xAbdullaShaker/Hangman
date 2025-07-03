@@ -1,0 +1,1 @@
+![Hangman Screenshot](assets/schangman.png)
