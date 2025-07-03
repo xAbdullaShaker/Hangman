@@ -1,5 +1,5 @@
 
-
+/*
  body {
   background-image: url('../assets/bearbg.jpg');
   background-size: cover;        
@@ -9,6 +9,18 @@
   height: 100vh;                  
   margin: 0;                    
 }
+ */ 
+
+ 
+ body {
+  background-image: url('../assets/bg2.jpg');
+  background-size: cover;        
+  background-position: center;    
+  background-repeat: no-repeat;  
+  background-attachment: fixed; 
+  height: 100vh;                  
+  margin: 0;  
+ }   
 
 
 h1 {
@@ -23,25 +35,25 @@ h1 {
 }
 
 #hangman-container {
-  position: fixed;         /* ثابت في مكانه على الشاشة */
-  top: 20px;               /* مسافة من الأعلى */
-  left: 270px;              /* مسافة من اليسار بدلاً من right */
-  width: 150px;            /* عرض ثابت */
-  height: 105px;           /* ارتفاع ثابت */
-  z-index: 9999;           /* فوق كل العناصر الأخرى */
-  background-color: transparent; /* شفاف */
-  display: block;          /* تأكد أنه ظاهر */
+  position: fixed;        
+  top: 20px;              
+  left: 270px;              
+  width: 150px;          
+  height: 105px;           
+  z-index: 9999;         
+  background-color: transparent; 
+  display: block;         
 }
 
 body, html {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;   /* يمنع التمدد الأفقي */
+  overflow-x: hidden; 
   height: 100%;
   width: 100%;
 }
 
-/* قلل تأثير العناصر الأخرى على التمركز */
+
 main, section, .wrapper, .container {
   position: static !important;
   margin: 0 !important;
@@ -50,7 +62,9 @@ main, section, .wrapper, .container {
   overflow: visible !important;
 }
 
-/*
+
+/* it moves
+
 #hangman-container {
   position: fixed;
   top: 10px;
@@ -154,4 +168,68 @@ main, section, .wrapper, .container {
   height: 2px;
   transform: rotate(-45deg);
   transform-origin: right center;
+}
+
+#play-button,
+#retry-button {
+  padding: 15px 20px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#play-button::after,
+#retry-button::after,
+#play-button::before,
+#retry-button::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+
+#play-button::before,
+#retry-button::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #28282d;
+  border-radius: 10px;
+}
+
+#play-button::after,
+#retry-button::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+#play-button:hover::before,
+#retry-button:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+#play-button:hover::after,
+#retry-button:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+#play-button:active::after,
+#retry-button:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
 }

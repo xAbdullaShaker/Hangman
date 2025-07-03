@@ -1,8 +1,12 @@
+
 /*-------------- Constants -------------*/
 const words = ['computer', 'array', 'code', 'algorithm', 'variable']; // List of words to choose from
 let selectedWord = words[Math.floor(Math.random() * words.length)]; // Pick a random word from the list
 
 const maxWrong = 6 //number of wrong guesses allowed
+
+// mid pic (not working yet)
+// const remainingLetters = selectedWord.split('').filter(l => !correctLetters.includes(l))
 
 /*---------- Variables (state) ---------*/
 let correctLetters = [] // store correct guessed letters
@@ -64,7 +68,7 @@ function showWarningImage() {
   img.alt = '1 try left warning'
   img.style.position = 'fixed'
   img.style.left = '500px'
-  img.style.top = '100px'
+  img.style.top = '80px'
   img.style.width = '150px'
   img.style.height = 'auto'
   img.style.zIndex = '9999'
@@ -76,6 +80,29 @@ function showWarningImage() {
   }, 5000); // remove after 5 seconds
 }
 
+/*
+// in progreess: Show image temporarily when theres 3 letter try is left :)
+function showMidImage() {
+  const img = document.createElement('img')
+  img.src = '../assets/midpic.jpg'
+  img.alt = '3 letter left'
+  img.style.position = 'fixed'
+  img.style.left = '500px'
+  img.style.top = '100px'
+  img.style.width = '150px'
+  img.style.height = 'auto'
+  img.style.zIndex = '9999'
+
+  document.body.appendChild(img);
+
+  setTimeout(() => {
+    document.body.removeChild(img);
+  }, 5000); // remove after 5 seconds
+}
+*/
+
+
+
 function handleGuess(letter) {
   if (selectedWord.includes(letter)) 
      { showMessage ("Correct!( ദ്ദി ˙ᗜ˙ )")
@@ -83,17 +110,18 @@ function handleGuess(letter) {
       correctLetters.push(letter);
       updateWordDisplay()
     } else {
-      showMessage("You already guessed that letter!(¬_¬)")
+      showMessage("You already guessed that letter!(¬_¬)");
     }
   }
    else {
     if (!wrongLetters.includes(letter)) {
       wrongLetters.push(letter)
       updateWrongDisplay()
-       // Show warning image if only 1 try left
+            // Show warning image if only 1 try left
       if ((maxWrong - wrongLetters.length) === 1) {
         showWarningImage();
       }
+
     } else {
       showMessage("Wrong again! You already guessed that. ( ˶°ㅁ°) !!")
     }
@@ -112,20 +140,26 @@ for (const letter of selectedWord) {
 function checkWin() {
   const won = selectedWord.split('').every(letter => correctLetters.includes(letter))
   if (won) {
-    showMessage("👏 You won!")
-    disableInput()
+    showMessage("ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧ You won!")
+    //setTimeout( () => 5000 
+
+   // )
+   // disableInput()
   }
 }
+
+
 // 6 tries 
 function checkLose() {
   if (wrongLetters.length >= maxWrong) {
     showMessage(`Game Over! The word was 💥💀 "${selectedWord}"`)
     setTimeout(() => {
-   // document.body.removeChild(img)
+    
+  showMessage
   }, 6000); // remove after 6 seconds but not working yet
     disableInput();
   }
-}
+} 
 
 
 
