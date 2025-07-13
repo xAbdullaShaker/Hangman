@@ -30,6 +30,7 @@ Guess the word before the full hangman is drawn to win!
 
 ---
 👉 **Play it here:** https://xabdullashaker.github.io/Hangman/
+---
 📏 **Tip:** For the best experience, resize your browser window to a smaller size. The game’s layout currently works best on smaller screens while the CSS is being improved.
 
 
