@@ -1,4 +1,4 @@
-![Hangman Screenshot](assets/schangman.png)
+
 
 # 🕹️ Hangman Game
 
