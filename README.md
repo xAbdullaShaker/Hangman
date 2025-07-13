@@ -29,6 +29,8 @@ Guess the word before the full hangman is drawn to win!
 5. You win if you guess the word before the hangman is fully drawn!
 
 ---
+👉 **Play it here:** https://xabdullashaker.github.io/Hangman/
+
 
 ## 💡 Technologies Used
 
